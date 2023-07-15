@@ -5,32 +5,17 @@
   "repository": "electron/simple-samples",
   "main": "app.js",
   "scripts": {
-    "start": "electron app.js"
+    "start": "electron app.js",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out ",
+    "package:installer": "node ./installer.js"
   },
-  "license": "ISC",
+  "license": "MIT",
+  "dependencies": {
+    "n8n": "0.216.0",
+    "yarn": "^1.22.19"
+  },
   "devDependencies": {
-    "electron": "^3.0.2",
-    "electron-packager": "^17.1.1"
-  },
-  "build": {
-    "npmRebuild": true,
-    "asar": true,
-    "asarUnpack": [
-      "app/**",
-      "node_modules/**",
-      "package.json"
-    ],
-    "productName": "Blint Demo",
-    "appId": "cerrussell.blint-demo",
-    "files": [
-      "app/*",
-      "node_modules/**/*",
-      "package.json"
-    ],
-    "win": {
-      "target": [
-        "portable"
-      ]
-    }
+    "electron": "20.3.9",
+    "electron-winstaller": "^5.1.0"
   }
 }
