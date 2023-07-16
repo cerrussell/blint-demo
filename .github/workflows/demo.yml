@@ -1,0 +1,27 @@
+name: blint-action demo
+on:
+    workflow_dispatch:
+
+jobs:
+    demo:
+      runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v3
+          - name: demo project
+            run: |
+              npm install
+              yarn install
+              yarn run package
+              yarn run installer
+          - name: use blint
+            id: blint
+            continue-on-error: true
+            uses: appthreat/blint-action@v1.0.0
+            with:
+              src: ./out/windows-installer/
+          - name: Upload a Build Artifact
+            if: ${{ steps.blint.outcome }} == 'success'
+            uses: actions/upload-artifact@v3
+            with:
+              path: ./out/windows-installer/*.exe
+
